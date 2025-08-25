@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>YouTube Title Translator Settings</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Settings</h2>
+        <div>
+            <label for="apiKey">Gemini API Key:</label>
+            <input type="password" id="apiKey" placeholder="Enter your API key">
+        </div>
+        <div>
+            <label for="model">Gemini Model:</label>
+            <select id="model">
+                <option value="gemini-2.5-pro">Gemini 2.5 Pro</option>
+                <option value="gemini-2.5-flash">Gemini 2.5 Flash</option>
+                <option value="gemini-2.5-flash-lite">Gemini 2.5 Flash-Lite</option>
+                <option value="gemini-2.0-flash">Gemini 2.0 Flash</option>
+                <option value="gemini-2.0-flash-lite">Gemini 2.0 Flash-Lite</option>
+            </select>
+        </div>
+        <div class="setting-item">
+            <label for="darkModeToggle">Dark Mode:</label>
+            <label class="switch">
+                <input type="checkbox" id="darkModeToggle">
+                <span class="slider round"></span>
+            </label>
+        </div>
+        <button id="saveButton">Save Settings</button>
+        <div id="status" class="status" style="display: none;"></div>
+    </div>
+    <script src="popup.js"></script>
+</body>
+</html>

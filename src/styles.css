@@ -1,0 +1,292 @@
+:root {
+    /* Light Mode Colors */
+    --background-color: #f0f2f5; /* Light gray background */
+    --text-color: #333333; /* Dark gray text */
+    --secondary-text-color: #666666; /* Medium gray for secondary text */
+    --accent-color: #007bff; /* Vibrant blue for primary actions */
+    --border-color: #e0e0e0; /* Light border */
+    --button-text-color: #ffffff; /* White button text */
+    --button-hover-bg-color: #0056b3; /* Darker blue on hover */
+    --popup-bg-color: #ffffff; /* White popup background */
+    --popup-shadow-color: rgba(0, 0, 0, 0.08); /* Softer shadow */
+    --success-bg-color: #d4edda; /* Light green for success */
+    --success-text-color: #155724; /* Dark green for success text */
+    --error-bg-color: #f8d7da; /* Light red for error */
+    --error-text-color: #721c24; /* Dark red for error text */
+}
+
+:root.dark-mode {
+    /* Dark Mode Colors (Silicon Valley AI Startup Look) */
+    --background-color: #1a1a2e; /* Deep dark blue/purple */
+    --text-color: #e0e0e0; /* Soft light gray */
+    --secondary-text-color: #a0a0a0; /* Medium gray for secondary text */
+    --accent-color: #8a2be2; /* Vibrant purple for primary actions */
+    --border-color: #3a3a5a; /* Subtle dark border */
+    --button-text-color: #ffffff; /* White button text */
+    --button-hover-bg-color: #6a1ba0; /* Darker purple on hover */
+    --popup-bg-color: #2a2a4a; /* Slightly lighter dark blue/purple */
+    --popup-shadow-color: rgba(0, 0, 0, 0.3); /* Softer shadow */
+    --success-bg-color: #28a745; /* Green for success */
+    --success-text-color: #ffffff; /* White for success text */
+    --error-bg-color: #dc3545; /* Red for error */
+    --error-text-color: #ffffff; /* White for error text */
+}
+
+
+/* General styles for popup.html and hover_popup.html */
+body {
+    width: 300px; /* Slightly narrower for conciseness */
+    padding: 16px; /* Reduced padding */
+    font-family: 'Roboto', 'Arial', sans-serif; /* Changed font family */
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.5; /* Slightly reduced line height */
+    margin: 0;
+    box-sizing: border-box;
+    font-size: 0.95em; /* Slightly smaller base font size */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Reduced gap */
+}
+
+h2 {
+    color: var(--text-color);
+    font-size: 1.4em; /* Slightly smaller heading */
+    margin-bottom: 8px; /* Reduced margin */
+}
+
+label {
+    color: var(--secondary-text-color);
+    font-size: 0.85em; /* Slightly smaller label font size */
+    margin-bottom: 3px; /* Reduced margin */
+    display: block;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px 10px; /* Reduced padding */
+    box-sizing: border-box;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 6px; /* Slightly less rounded corners */
+    font-size: 0.95em; /* Consistent with body font size */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(138, 43, 226, 0.15); /* Softer focus shadow */
+}
+
+button {
+    background-color: var(--accent-color);
+    color: var(--button-text-color);
+    border: none;
+    padding: 10px 12px; /* Reduced padding */
+    border-radius: 6px; /* Slightly less rounded corners */
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95em; /* Consistent with body font size */
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15); /* Softer shadow */
+}
+
+button:hover {
+    background-color: var(--button-hover-bg-color);
+    transform: translateY(-0.5px); /* Subtle lift effect */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Softer shadow on hover */
+}
+
+button:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.status {
+    margin-top: 10px; /* Reduced margin */
+    padding: 8px; /* Reduced padding */
+    border-radius: 6px; /* Slightly less rounded corners */
+    text-align: center;
+    font-weight: 500;
+    font-size: 0.9em; /* Slightly smaller font size */
+}
+
+.success {
+    background-color: var(--success-bg-color);
+    color: var(--success-text-color);
+}
+
+.error {
+    background-color: var(--error-bg-color);
+    color: var(--error-text-color);
+}
+
+/* Styles for hover_popup.html */
+.yt-translator-popup {
+    position: absolute;
+    z-index: 9999;
+    background-color: var(--popup-bg-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 10px; /* Slightly less rounded corners */
+    box-shadow: 0 6px 15px var(--popup-shadow-color); /* Softer shadow */
+    padding: 16px; /* Reduced padding */
+    max-width: 400px; /* Slightly narrower */
+    font-size: 1em; /* Increased font size */
+    line-height: 1.6;
+    backdrop-filter: blur(4px); /* Slightly less blur */
+    -webkit-backdrop-filter: blur(4px); /* For Safari */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Added transition */
+}
+
+.yt-translator-popup.dark-mode {
+    background-color: #2a2a4a; /* Directly use dark mode popup background color */
+    color: #e0e0e0; /* Directly use dark mode text color */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Directly use dark mode shadow color */
+}
+
+.yt-translator-popup-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Reduced gap */
+}
+
+.yt-translator-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 6px; /* Reduced margin */
+}
+
+.yt-translator-button {
+    background: none;
+    border: none;
+    color: var(--secondary-text-color);
+    font-size: 20px; /* Slightly smaller icon */
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+    transition: color 0.3s ease;
+}
+
+.yt-translator-button:hover {
+    color: var(--accent-color);
+}
+
+#yt-translator-text {
+    margin: 0;
+    font-weight: 500;
+    font-size: 1.8em; /* Adjusted font size */
+}
+
+#yt-translator-explanation {
+    margin-top: 8px; /* Reduced margin */
+    padding-top: 8px; /* Reduced padding */
+    border-top: 1px solid var(--border-color);
+}
+
+#yt-translator-explanation h4 {
+    color: var(--accent-color);
+    font-size: 1em; /* Consistent with body font size */
+    margin-bottom: 4px; /* Reduced margin */
+}
+
+#yt-translator-explanation-text {
+    font-size: 1.7em; /* Adjusted font size for readability */
+    color: var(--secondary-text-color);
+}
+
+.yt-translator-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 8px; /* Reduced margin */
+}
+
+/* Fancy Lever Toggle Styles */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 48px; /* Wider switch */
+    height: 24px; /* Taller switch */
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--secondary-text-color); /* Off state color */
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 24px; /* Fully rounded */
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px; /* Smaller thumb */
+    width: 18px; /* Smaller thumb */
+    left: 3px; /* Position from left */
+    bottom: 3px; /* Position from bottom */
+    background-color: var(--button-text-color); /* Thumb color */
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%; /* Circular thumb */
+}
+
+input:checked + .slider {
+    background-color: var(--accent-color); /* On state color */
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px var(--accent-color);
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(24px); /* Move thumb to right */
+    -ms-transform: translateX(24px);
+    transform: translateX(24px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 24px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* General UI Animations */
+body, .container, h2, label, input, select, button, .status, .yt-translator-popup, .yt-translator-popup-container, .yt-translator-header, .yt-translator-button, #yt-translator-text, #yt-translator-explanation, #yt-translator-explanation h4, #yt-translator-explanation-text, .yt-translator-footer {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Specific enhancements for existing elements */
+input, select {
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+button {
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease, color 0.3s ease;
+}
+
+.yt-translator-popup {
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+}
+
+.yt-translator-button {
+    transition: color 0.3s ease, transform 0.2s ease;
+}
