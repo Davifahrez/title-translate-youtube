@@ -15,10 +15,10 @@
     --error-text-color: #721c24; /* Dark red for error text */
 }
 
-:root.dark-mode {
+.dark-mode {
     /* Dark Mode Colors (Silicon Valley AI Startup Look) */
     --background-color: #1a1a2e; /* Deep dark blue/purple */
-    --text-color: #e0e0e0; /* Soft light gray */
+    --text-color: #FFFFFF; /* Bright white for high contrast */
     --secondary-text-color: #a0a0a0; /* Medium gray for secondary text */
     --accent-color: #8a2be2; /* Vibrant purple for primary actions */
     --border-color: #3a3a5a; /* Subtle dark border */
@@ -34,7 +34,7 @@
 
 
 /* General styles for popup.html and hover_popup.html */
-body {
+.extension-body {
     width: 300px; /* Slightly narrower for conciseness */
     padding: 16px; /* Reduced padding */
     font-family: 'Roboto', 'Arial', sans-serif; /* Changed font family */
@@ -126,28 +126,36 @@ button:active {
     color: var(--error-text-color);
 }
 
+.info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+
+.dark-mode .info {
+    background-color: #34495e;
+    color: #ecf0f1;
+}
+
 /* Styles for hover_popup.html */
 .yt-translator-popup {
     position: absolute;
     z-index: 9999;
-    background-color: var(--popup-bg-color);
-    color: var(--text-color);
     border: none;
     border-radius: 10px; /* Slightly less rounded corners */
-    box-shadow: 0 6px 15px var(--popup-shadow-color); /* Softer shadow */
     padding: 16px; /* Reduced padding */
     max-width: 400px; /* Slightly narrower */
     font-size: 1em; /* Increased font size */
     line-height: 1.6;
     backdrop-filter: blur(4px); /* Slightly less blur */
     -webkit-backdrop-filter: blur(4px); /* For Safari */
-    transition: background-color 0.3s ease, color 0.3s ease; /* Added transition */
-}
-
-.yt-translator-popup.dark-mode {
-    background-color: #2a2a4a; /* Directly use dark mode popup background color */
-    color: #e0e0e0; /* Directly use dark mode text color */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Directly use dark mode shadow color */
+    background-color: var(--popup-bg-color);
+    color: var(--text-color);
+    box-shadow: 0 6px 15px var(--popup-shadow-color);
+    /* Animation properties */
+    opacity: 0;
+    transform: scale(0.98) translateY(-5px);
+    transform-origin: top center;
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out, background-color 0.3s ease, color 0.3s ease;
 }
 
 .yt-translator-popup-container {
@@ -155,6 +163,11 @@ button:active {
     flex-direction: column;
     gap: 10px; /* Reduced gap */
 }
+.yt-translator-popup.visible {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+}
+
 
 .yt-translator-header {
     display: flex;
@@ -181,29 +194,68 @@ button:active {
     margin: 0;
     font-weight: 500;
     font-size: 1.8em; /* Adjusted font size */
+    transition: opacity 0.3s ease-in-out;
 }
 
 #yt-translator-explanation {
-    margin-top: 8px; /* Reduced margin */
-    padding-top: 8px; /* Reduced padding */
-    border-top: 1px solid var(--border-color);
+    /* Initial (hidden) state for animation */
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 1px solid transparent; /* Start with transparent border */
+    transform: translateY(-10px);
+    transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out, transform 0.4s ease-in-out, margin-top 0.4s ease-in-out, padding-top 0.4s ease-in-out, border-color 0.3s ease-in-out;
 }
 
-#yt-translator-explanation h4 {
+#yt-translator-explanation.visible {
+    /* Visible state */
+    max-height: 500px; /* A large enough value to accommodate content */
+    opacity: 1;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top-color: var(--border-color);
+    transform: translateY(0);
+}
+
+#yt-translator-explanation h2 {
     color: var(--accent-color);
     font-size: 1em; /* Consistent with body font size */
     margin-bottom: 4px; /* Reduced margin */
 }
 
+.dark-mode #yt-translator-explanation h2.cached {
+    color: var(--text-color); /* Use main text color for cached title in dark mode for better readability */
+}
+
 #yt-translator-explanation-text {
     font-size: 1.7em; /* Adjusted font size for readability */
-    color: var(--secondary-text-color);
+    color: var(--text-color);
+    transition: opacity 0.3s ease-in-out;
 }
 
 .yt-translator-footer {
     display: flex;
     justify-content: flex-end;
-    margin-top: 8px; /* Reduced margin */
+    align-items: center; /* Vertically align spinner and button */
+    margin-top: 8px;
+    gap: 8px; /* Space between spinner and button */
+}
+
+.yt-translator-model-info-container {
+    display: flex;
+    gap: 8px;
+    margin-right: auto; /* Pushes this element to the left */
+    align-items: center;
+}
+
+.yt-translator-model-info {
+    font-size: 0.75em;
+    color: var(--secondary-text-color);
+    font-style: italic;
+    white-space: nowrap;
+    opacity: 0.8;
 }
 
 /* Fancy Lever Toggle Styles */
@@ -269,24 +321,98 @@ input:checked + .slider:before {
     border-radius: 50%;
 }
 
-/* General UI Animations */
-body, .container, h2, label, input, select, button, .status, .yt-translator-popup, .yt-translator-popup-container, .yt-translator-header, .yt-translator-button, #yt-translator-text, #yt-translator-explanation, #yt-translator-explanation h4, #yt-translator-explanation-text, .yt-translator-footer {
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+/* Spinner Styles */
+.yt-translator-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--accent-color);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: yt-translator-spin 1s linear infinite;
+    display: none;
 }
 
-/* Specific enhancements for existing elements */
-input, select {
-    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+.yt-translator-footer.loading .yt-translator-spinner {
+    display: block;
 }
 
-button {
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease, color 0.3s ease;
+@keyframes yt-translator-spin {
+    to {
+        transform: rotate(360deg);
+    }
 }
 
-.yt-translator-popup {
-    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
 }
 
-.yt-translator-button {
-    transition: color 0.3s ease, transform 0.2s ease;
+/* Draggable List Styles */
+.fallback-list-container {
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 8px;
+    background-color: var(--background-color);
+    min-height: 100px;
+}
+
+.fallback-list-container.disabled {
+    opacity: 0.6;
+    background-color: #e9ecef;
+    pointer-events: none; /* Prevents all mouse interactions, including drag */
+}
+
+.dark-mode .fallback-list-container.disabled {
+    background-color: #2c3e50;
+}
+
+.fallback-item {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    margin-bottom: 4px;
+    background-color: var(--popup-bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    cursor: grab;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.fallback-item.dragging {
+    opacity: 0.5;
+    background-color: var(--accent-color);
+    color: var(--button-text-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.fallback-item.cooldown {
+    background-color: var(--background-color);
+    color: var(--secondary-text-color);
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.drag-handle {
+    margin-right: 10px;
+    color: var(--secondary-text-color);
+    font-size: 1.2em;
+}
+
+.cooldown-label {
+    margin-left: auto;
+    font-style: italic;
+    font-size: 0.9em;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.button-group button {
+    flex-grow: 1;
 }

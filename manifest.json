@@ -1,23 +1,22 @@
 {
   "manifest_version": 3,
   "name": "YouTube Title Translator",
-  "version": "1.0",
-  "description": "Translates YouTube video titles on hover using the Gemini API.",
+  "version": "1.1",
+  "description": "Translates YouTube video titles on hover using a configurable AI API.",
   "action": {
     "default_popup": "src/popup.html"
   },
   "permissions": [
     "storage",
     "activeTab",
-    "scripting",
-    "offscreen"
+    "scripting"
   ],
   "host_permissions": [
     "https://www.youtube.com/*",
     "https://generativelanguage.googleapis.com/*"
   ],
   "background": {
-    "service_worker": "src/background.new.js"
+    "service_worker": "src/background.js"
   },
   "content_scripts": [
     {
@@ -31,10 +30,5 @@
       "resources": [ "src/hover_popup.html"],
       "matches": [ "https://www.youtube.com/*" ]
     }
-  ],
-  "sandbox": {
-    "pages": [
-      "src/sandbox.html"
-    ]
-  }
+  ]
 }

@@ -4,22 +4,22 @@
     <title>YouTube Title Translator Settings</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="extension-body">
     <div class="container">
         <h2>Settings</h2>
         <div>
-            <label for="apiKey">Gemini API Key:</label>
+            <label for="apiKey">API Key:</label>
             <input type="password" id="apiKey" placeholder="Enter your API key">
         </div>
         <div>
-            <label for="model">Gemini Model:</label>
+            <label for="model">AI Model:</label>
             <select id="model">
-                <option value="gemini-2.5-pro">Gemini 2.5 Pro</option>
-                <option value="gemini-2.5-flash">Gemini 2.5 Flash</option>
-                <option value="gemini-2.5-flash-lite">Gemini 2.5 Flash-Lite</option>
-                <option value="gemini-2.0-flash">Gemini 2.0 Flash</option>
-                <option value="gemini-2.0-flash-lite">Gemini 2.0 Flash-Lite</option>
+                <!-- Options are populated dynamically by popup.js -->
             </select>
+        </div>
+        <div>
+            <label for="translationPrompt">Translation Prompt:</label>
+            <textarea id="translationPrompt" rows="5" placeholder="Enter your custom translation prompt"></textarea>
         </div>
         <div class="setting-item">
             <label for="darkModeToggle">Dark Mode:</label>
@@ -28,7 +28,47 @@
                 <span class="slider round"></span>
             </label>
         </div>
-        <button id="saveButton">Save Settings</button>
+        <div class="setting-item">
+            <label for="explanationCacheToggle">Explanation Cache:</label>
+            <label class="switch">
+                <input type="checkbox" id="explanationCacheToggle">
+                <span class="slider round"></span>
+            </label>
+        </div>
+        <div class="setting-item">
+            <label for="modelCyclingToggle">Model Fallback:</label>
+            <label class="switch">
+                <input type="checkbox" id="modelCyclingToggle">
+                <span class="slider round"></span>
+            </label>
+        </div>
+        <div class="setting-item">
+            <label for="showModelToggle">Show Model Used:</label>
+            <label class="switch">
+                <input type="checkbox" id="showModelToggle">
+                <span class="slider round"></span>
+            </label>
+        </div>
+        <div class="setting-item">
+            <label for="commentTranslationToggle">Enable Comment Translation:</label>
+            <label class="switch">
+                <input type="checkbox" id="commentTranslationToggle">
+                <span class="slider round"></span>
+            </label>
+        </div>
+        <div>
+            <label for="explanationPrompt">Explanation Prompt:</label>
+            <textarea id="explanationPrompt" rows="5" placeholder="Enter your custom explanation prompt"></textarea>
+        </div>
+        <div>
+            <label>Model Fallback Chain (drag to reorder):</label>
+            <div id="fallback-list-container" class="fallback-list-container"></div>
+        </div>
+        <div class="button-group">
+            <button id="saveButton">Save Settings</button>
+            <button id="revalidateButton">Re-validate Models</button>
+            <button id="clearCooldownsButton">Clear Cooldowns</button>
+        </div>
         <div id="status" class="status" style="display: none;"></div>
     </div>
     <script src="popup.js"></script>
