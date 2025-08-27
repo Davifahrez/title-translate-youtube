@@ -12,10 +12,10 @@ A simple and lightweight Chrome extension to translate YouTube video titles in r
 
 ## Installation
 
-1.  **Download**: Download this repository as a ZIP file and unzip it on your local machine.
+1.  **Download**: Go to the [Releases page](https://github.com/Davifahrez/title-translate-youtube/releases) and download the latest `yt-tl.crx` file.
 2.  **Open Chrome Extensions**: Open Chrome and navigate to `chrome://extensions/`.
 3.  **Enable Developer Mode**: Turn on the "Developer mode" toggle in the top-right corner.
-4.  **Load the Extension**: Click the "Load unpacked" button and select the unzipped extension directory.
+4.  **Install the Extension**: Drag and drop the downloaded `yt-tl.crx` file onto the `chrome://extensions/` page. Confirm any prompts to add the extension.
 
 ## Setup
 
